@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Depot</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <title>Pragog Books Online Store</title>
+    <%= csrf_meta_tags %> <!--sets up all the behind-the-scenes data needed to prevent 
+    cross-site request forgery attacks, important for forms!-->
+
+   
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <main class='<%= controller.controller_name %>'>
-      <%= yield %>
+    <header class="main">
+      <%= image_tag 'logo.svg', alt: 'The Pragmatic Bookshelf' %>
+      <h1><%= @page_title %></h1>
+    </header>
+    <section class="content">
+      <nav class="side_nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/questions">Questions</a></li>
+          <li><a href="/news">News</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+            <main class='<%= controller.controller_name %>'>
+        <%= yield %>
     </main>
+   </section>
   </body>
 </html>
+
+<!--This layout has three Rails-specific items. The Rails stylesheet_link_tag() helper
+method generates a <link> tag to our application's stylesheet ans specifies an option 
+to enable Turbolinks, which transparently works behind the scenes to speed up page changes 
+within an application's scripts !-->
+
+<!-- Similarly, the javascript_include_tag() method generates a <script> to load 
+our application’s scripts !-->
