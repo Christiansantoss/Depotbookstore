@@ -9,11 +9,12 @@
     <%= image_tag(product.image_url) %> 
     <h2><%= product.title %></h2>
     <p>
-      <%= sanitize(product.description) %> <!--Sanitize method allows us to safely add HTML stylings!-->
+      <%= sanitize(product.description) %> <!-- Sanitize method allows us to safely add HTML stylings!-->
     </p>
     <div class="price"> 
       <%= number_to_currency(product.price) %> <!-- Helper method to format the price as a currency. Using 
                                                 the helper in the view is just as a matter of invoking them as a regular methods!-->
+      <%= button_to 'Add to Cart', line_items_path(product_id: product) %>
     </div> 
   </li>
   <% end %> 
