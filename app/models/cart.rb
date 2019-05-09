@@ -9,7 +9,12 @@ class Cart < ApplicationRecord
             current_item = line_items.build(product_id: product.id)
         end
         current_item
-end
+    end
+    
+    def total_price
+        line_items.to_a.sum { |item| item.total_price } # We implement the Cart method using the nifty Array::sum() method 
+                                                        # to sum the prices of each item in the collection
+    end
 end
 
 # smart add_product() method in our Cart, one that checks if our 

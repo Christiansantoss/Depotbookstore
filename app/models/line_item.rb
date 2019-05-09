@@ -1,6 +1,9 @@
 class LineItem < ApplicationRecord 
   belongs_to :product
   belongs_to :cart
+  def total_price
+    product.price 
+  end
 end
 
 # Database now has a place to store the references among the line items, carts and products.

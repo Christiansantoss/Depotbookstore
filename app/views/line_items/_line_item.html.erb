@@ -1,0 +1,11 @@
+<tr>
+  <td class="quantity"><%= line_item.quantity %></td>
+  <td><%= line_item.product.title %></td>
+  <td class="price"><%= number_to_currency(line_item.total_price) %></td>
+</tr>
+
+
+<!--  Inside the partial template, refer to the 
+current object by using the variable name that matches the name of the
+template. In this case, the partial is named line_item, so inside 
+the partial we expect to have a variable called line_item!-->
