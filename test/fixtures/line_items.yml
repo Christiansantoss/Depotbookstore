@@ -4,6 +4,11 @@ one:
   product: two
   cart: one
 
+
 two:
-  product: two
-  cart: two
+  product: ruby
+  order: one 
+ 
+
+
+# Modified validation rules we need to modify our test fixtures
