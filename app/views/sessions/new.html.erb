@@ -1,0 +1,29 @@
+<section class="depot_form">
+<% if flash[:alert] %>
+<aside class ="notice"><%= flash[:alert] %> </aside>
+<% end %>
+
+<%= form_tag do %>
+<h2>Please Log In</h2>
+
+<div class= "field ">
+    <%= label_tag :name, 'Name:'%>
+    <%= text_field_tag :name, params[:name] %>
+</div>
+
+<div class="field">
+    <%= label_tag :password, 'Password '%>
+    <%= password_field_tag :password, params[:password] %>
+</div>
+
+ <div class="actions">
+      <%= submit_tag "Login" %>
+</div>
+  <% end %>
+</section>
+
+<!-- This form is different from ones you saw earlier. Rather than using form_with, 
+it uses form_tag, which simply builds a regular HTML <form>. Inside that form,
+it uses text_field_tag and password_field_tag, two helpers that create HTML <input> tags.
+Each helper takes two parameters. The first is the name to give to the field, 
+and the second is the value with which to populate the field! -->

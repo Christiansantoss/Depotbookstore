@@ -14,4 +14,4 @@ class PurchaseOrderPayType extends React.Component {
     }
 }
 
-export default PurchaseOrderPaytype 
+export default PurchaseOrderPayType 
