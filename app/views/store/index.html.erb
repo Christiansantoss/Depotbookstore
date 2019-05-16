@@ -1,7 +1,7 @@
 <% if notice %>
   <aside id="notice"><%= notice %></aside>
 <% end %>
-<h1>Your Pragmatic Catalog</h1>
+ <h1><%= t('.title_html') %></h1>
 
 <ul class="catalog">
       <% cache @products do %>
@@ -16,8 +16,8 @@
         <div class="price"> 
             <%= number_to_currency(product.price) %> <!-- Helper method to format the price as a currency. Using 
                                                       the helper in the view is just as a matter of invoking them as a regular methods!-->
-            <%= button_to 'Add to Cart', line_items_path(product_id: product),
-            remote: true %>
+            <%= button_to t('.add_html'), line_items_path(product_id: product),
+              remote: true %>
         </div> 
     </li>
    <% end %> 
