@@ -27,6 +27,10 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
  gem 'bcrypt', '~> 3.1.7'
 
+ # Translations into javascript object and allows us to access them
+
+gem 'i18n-js'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
