@@ -107,7 +107,7 @@
     // Shift back
     value = value.toString().split('e');
     return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
-  }
+  };
 
   var lazyEvaluate = function(message, scope) {
     if (isFunction(message)) {
@@ -115,7 +115,7 @@
     } else {
       return message;
     }
-  }
+  };
 
   var merge = function (dest, obj) {
     var key, value;
@@ -389,7 +389,7 @@
   // This is used internally by some functions and should not be used as an
   // public API.
   I18n.lookup = function(scope, options) {
-    options = options || {}
+    options = options || {};
 
     var locales = this.locales.get(options.locale).slice()
       , locale
@@ -448,7 +448,7 @@
 
   // Lookup dedicated to pluralization
   I18n.pluralizationLookup = function(count, scope, options) {
-    options = options || {}
+    options = options || {};
     var locales = this.locales.get(options.locale).slice()
       , locale
       , scopes
@@ -471,16 +471,16 @@
         if (!isObject(translations)) {
           break;
         }
-        if (scopes.length == 0) {
+        if (scopes.length === 0) {
           message = this.pluralizationLookupWithoutFallback(count, locale, translations);
         }
       }
-      if (message != null && message != undefined) {
+      if (typeof message !== "undefined" && message !== null) {
         break;
       }
     }
 
-    if (message == null || message == undefined) {
+    if (typeof message === "undefined" || message === null) {
       if (isSet(options.defaultValue)) {
         if (isObject(options.defaultValue)) {
           message = this.pluralizationLookupWithoutFallback(count, options.locale, options.defaultValue);
@@ -570,11 +570,12 @@
 
   // Translate the given scope with the provided options.
   I18n.translate = function(scope, options) {
-    options = options || {}
+    options = options || {};
 
     var translationOptions = this.createTranslationOptions(scope, options);
 
     var translation;
+    var usedScope = scope;
 
     var optionsWithoutDefault = this.prepareOptions(options)
     delete optionsWithoutDefault.defaultValue
@@ -584,7 +585,8 @@
     var translationFound =
       translationOptions.some(function(translationOption) {
         if (isSet(translationOption.scope)) {
-          translation = this.lookup(translationOption.scope, optionsWithoutDefault);
+          usedScope = translationOption.scope;
+          translation = this.lookup(usedScope, optionsWithoutDefault);
         } else if (isSet(translationOption.message)) {
           translation = lazyEvaluate(translationOption.message, scope);
         }
@@ -605,7 +607,7 @@
         return (typeof(t) === "string" ? this.interpolate(t, options) : t);
       }, this);
     } else if (isObject(translation) && isSet(options.count)) {
-      translation = this.pluralize(options.count, scope, options);
+      translation = this.pluralize(options.count, usedScope, options);
     }
 
     return translation;
@@ -613,11 +615,11 @@
 
   // This function interpolates the all variables in the given message.
   I18n.interpolate = function(message, options) {
-    if (message === null) {
+    if (message == null) {
       return message;
     }
 
-    options = options || {}
+    options = options || {};
     var matches = message.match(this.placeholder)
       , placeholder
       , value
@@ -628,8 +630,6 @@
     if (!matches) {
       return message;
     }
-
-    var value;
 
     while (matches.length) {
       placeholder = matches.shift();
@@ -643,7 +643,7 @@
         value = this.missingPlaceholder(placeholder, message, options);
       }
 
-      regex = new RegExp(placeholder.replace(/\{/gm, "\\{").replace(/\}/gm, "\\}"));
+      regex = new RegExp(placeholder.replace(/{/gm, "\\{").replace(/}/gm, "\\}"));
       message = message.replace(regex, value);
     }
 
@@ -655,14 +655,14 @@
   // which will be retrieved from `options`.
   I18n.pluralize = function(count, scope, options) {
     options = this.prepareOptions({count: String(count)}, options)
-    var pluralizer, message, result;
+    var pluralizer, result;
 
     result = this.pluralizationLookup(count, scope, options);
-    if (result.translations == undefined || result.translations == null) {
+    if (typeof result.translations === "undefined" || result.translations == null) {
       return this.missingTranslation(scope, options);
     }
 
-    if (result.message != undefined && result.message != null) {
+    if (typeof result.message !== "undefined" && result.message != null) {
       return this.interpolate(result.message, options);
     }
     else {
@@ -674,7 +674,7 @@
   // Return a missing translation message for the given parameters.
   I18n.missingTranslation = function(scope, options) {
     //guess intended string
-    if(this.missingBehaviour == 'guess'){
+    if(this.missingBehaviour === 'guess'){
       //get only the last portion of the scope
       var s = scope.split('.').slice(-1)[0];
       //replace underscore with space && camelcase with space and lowercase letter
@@ -833,10 +833,14 @@
   //
   I18n.parseDate = function(date) {
     var matches, convertedDate, fraction;
-    // we have a date, so just return it.
-    if (typeof(date) == "object") {
+    // A date input of `null` or `undefined` will be returned as-is
+    if (date == null) {
       return date;
-    };
+    }
+    // we have a date, so just return it.
+    if (typeof(date) === "object") {
+      return date;
+    }
 
     matches = date.toString().match(/(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}):(\d{2}):(\d{2})([\.,]\d{1,3})?)?(Z|\+00:?00)?/);
 
@@ -980,12 +984,18 @@
       , format = this.lookup(scope)
     ;
 
-    if (date.toString().match(/invalid/i)) {
-      return date.toString();
+    // A date input of `null` or `undefined` will be returned as-is
+    if (date == null) {
+      return date;
+    }
+
+    var date_string = date.toString()
+    if (date_string.match(/invalid/i)) {
+      return date_string;
     }
 
     if (!format) {
-      return date.toString();
+      return date_string;
     }
 
     return this.strftime(date, format);
@@ -1034,7 +1044,7 @@
   };
 
   I18n.getFullScope = function(scope, options) {
-    options = options || {}
+    options = options || {};
 
     // Deal with the scope as an array.
     if (isArray(scope)) {
