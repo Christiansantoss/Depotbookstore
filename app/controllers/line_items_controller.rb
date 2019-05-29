@@ -27,6 +27,8 @@ class LineItemsController < ApplicationController
   # POST /line_items
   # POST /line_items.json
   def create
+    puts "******* In line items controller create"
+    puts params.to_s
     product = Product.find(params[:product_id]) # Using params object to get the :product_id parameter from the request
     @line_item = @cart.add_product(product)
 

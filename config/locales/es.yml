@@ -1,5 +1,10 @@
 es:
-
+  store:
+    index:
+      title_html:  "Su Cat&aacute;logo de Pragmatic"
+      add_html: "A&ntilde;adir al Carrito"
+      test: "testingSSS"
+      
   number:
     currency:
       format:
@@ -35,10 +40,7 @@ es:
       empty:       "Vaciar Carrito"
       checkout:    "Comprar"
 
-  store:
-    index:
-      title_html:  "Su Cat&aacute;logo de Pragmatic"
-      add_html:    "A&ntilde;adir al Carrito"
+  
 
   orders:
     new:
