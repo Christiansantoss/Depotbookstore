@@ -42,9 +42,7 @@
     <section class="content">
       <nav class="side_nav">
       
-      <div id="cart" class="carts">
-             <%= render_if @cart && @cart.line_items.any?, @cart %>
-      </div>
+
 
         <ul>
           <li><a href="/"><%= t('.home') %></a></li>
@@ -65,6 +63,15 @@
         </nav>
       <% end %>
      </nav>
+
+      <div id="cart" class="carts">
+            <% if session[:hide_cart] %>
+            <%= render_if @cart && @cart.line_items.any?, "carts/cart_hidden" %>
+            <% else %>
+             <%= render_if @cart && @cart.line_items.any?, @cart %>
+             <% end %>
+      </div>      
+
      <main class='<%= controller.controller_name %>'>
         <%= yield %>
     </main>

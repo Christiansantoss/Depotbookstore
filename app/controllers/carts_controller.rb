@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   skip_before_action :authorize, only: [:create, :update, :destroy, :hide_cart]
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :set_cart, only: [:show, :edit, :update, :destroy, :hide_cart]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart 
 
   # GET /carts
@@ -66,7 +66,7 @@ class CartsController < ApplicationController
   end
 
   def hide_cart
-    puts "***********HIDE CART METHOD"
+    session[:hide_cart] ? session[:hide_cart] = false : session[:hide_cart] = true
   end
 
 
