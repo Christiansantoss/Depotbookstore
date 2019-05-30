@@ -10,6 +10,14 @@ class Product < ApplicationRecord
 }
     validates :price, numericality: { greater_than_or_equal_to: 0.01 }
 
+    def locale_currency_exchange(price)
+        if I18n.locale == :en 
+            return price 
+        else 
+            return price * 0.9
+        end
+    end
+
   private
 
     def ensure_not_referenced_by_any_line_item

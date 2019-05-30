@@ -14,6 +14,37 @@
  *= require_self
  */
 
+#header_bar_image {
+  display: inline-block;
+}
+#search_bar {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 25px;
+  margin-left: 100px;
+  #search_bar_search_by {
+    /*-webkit-appearance: none; */
+    border: none;
+    height: 36px;
+    font-size: 1em;
+  }
+  #search_bar_text {
+    border: none;
+    width: 400px;
+    height: 34px;
+    border-radius: 0.5em 0 0 0.5em;
+    font-size: 1em;
+  }
+  #search_bar_submit {
+    width: 36px;
+    height: 36px;
+    margin-bottom: -13px;
+    margin-left: -5px;
+    background-color: white;
+    border-radius: 0 0.5em 0.5em 0;
+
+  }
+}
 body {
   margin: 0px;
   padding: 0;

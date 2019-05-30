@@ -20,6 +20,9 @@
   <%= button_to ('Checkout'), new_order_path(locale: I18n.locale),
                 method: :get,
                 class: "checkout" %>
+
+  <%= button_to ("Hide"), carts_hide_cart_path %>
+
 </div>
 
 </article>

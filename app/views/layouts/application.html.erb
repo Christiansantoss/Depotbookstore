@@ -15,8 +15,18 @@
 
   <body>
     <header class="main">
-      <%= image_tag 'logo.svg', alt: 'The Pragmatic Bookshelf' %>
-      <h1><%= @page_title %></h1>
+      <div id="header_bar_image">
+        <%= image_tag 'logo.svg', alt: 'The Pragmatic Bookshelf' %>
+        <h1><%= @page_title %></h1>
+      </div>
+      
+      <div id="search_bar">
+        <%= form_tag store_index_path, method: :get do  %>
+          <%= select_tag :search_by, raw("<option> Keyword </option><option> Title </option><option> Description </option>"), id: 'search_bar_search_by' %>
+          <%= text_field_tag(:search, params[:search], id: 'search_bar_text') %>
+          <%= image_submit_tag "search.png", id: 'search_bar_submit'%>
+        <% end %>
+      </div>
 
         <aside>
         <%= form_tag store_index_path, class: 'locale' do %>

@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  skip_before_action :authorize, only: [:create, :update, :destroy]
+  skip_before_action :authorize, only: [:create, :update, :destroy, :hide_cart]
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart 
 
@@ -64,6 +64,13 @@ class CartsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def hide_cart
+    puts "***********HIDE CART METHOD"
+  end
+
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

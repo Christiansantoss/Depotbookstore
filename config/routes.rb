@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     get :who_bought, on: :member
   end
 
+  post 'carts/hide_cart'
+
+
+
   scope '(:locale)' do
     resources :orders
     resources :line_items
