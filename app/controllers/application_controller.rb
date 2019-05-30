@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
           logger.error flash.now[:notice]
         end
       end
-      puts "********************"
       puts "SET LOCALE TO: "+I18n.locale.to_s
     end
 
