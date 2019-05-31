@@ -1,0 +1,19 @@
+<ul class="catalog">
+
+  
+      <li>
+        <%= image_tag(product.image_url) %> 
+        <h2><%= product.title %></h2>
+        <p>
+          <%= sanitize(product.description) %>
+        </p>
+
+        <div class="price"> 
+          <%= number_to_currency(product.locale_currency_exchange(product.price)) %> 
+         
+         
+          <%= button_to t('.add_html'), line_items_path(product_id: product, locale: I18n.locale), remote: true %>   
+        </div> 
+      </li>
+    
+</ul>

@@ -31,6 +31,11 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'i18n-js'
 
+
+gem 'jquery-rails'
+gem 'will_paginate', '~> 3.1.7'
+gem 'awesome_print'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
