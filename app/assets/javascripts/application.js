@@ -14,9 +14,9 @@
 //= require activestorage
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
 //= require i18n
 //= require i18n/translations
 //= require popper
-//= require bootstrap-sprockets
