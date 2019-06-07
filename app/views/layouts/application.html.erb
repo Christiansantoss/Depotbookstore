@@ -39,10 +39,13 @@
       
     </header> -->
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light">
 
-    <a class="navbar-brand" data-method="get" href="/">
-    <img src="/assets/logo.svg" alt="Logo" width="150" height="59"> </a>
+  <%=link_to image_tag("logo.svg", size:"150x59"), store_index_path, :class => "navbar-brand", method: :get %>
+
+
+   <!-- <a class="navbar-brand" data-method="get" href="/">
+    <img src="/assets/logo.svg" alt="Logo" width="150" height="59"> </a> -->
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -57,8 +60,8 @@
           Language
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">English</a>
-          <a class="dropdown-item" href="#">Spanish</a>
+          <a class="dropdown-item" href="https://bookapp12.herokuapp.com/en">English</a>
+          <a class="dropdown-item" href="https://bookapp12.herokuapp.com/es">Spanish</a>
         </div>
         <!-- vvvvv Login section below vvvvv -->
 
@@ -67,32 +70,31 @@
           Login
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Login</a>
+          <a class="dropdown-item" href="/login">Login</a>
         </div>
 
       <!-- vvvv Site button below vvvv -->
 
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Questions <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="/" data-method="get">Questions</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">News</a>
+        <a class="nav-link" href="/" data-method="get">News</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link" href="/" data-method="get">Contact</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+
+        <%= form_tag store_index_path,{:method=> 'get', class:"form-inline my-2 my-lg-0", role: "search"} do  %>
+        <div class="form-group">
+          <%= text_field_tag :search, "",class:"form control", placeholder: "search" %>
+          </div>
+          <%= submit_tag "search", class: 'btn btn-outline-success my-2 my-sm-0'%>
+        <% end %>    
   </div>
 </nav>
-
-
-
-
 
 
     <section class="content">

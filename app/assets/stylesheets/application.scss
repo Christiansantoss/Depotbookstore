@@ -1,5 +1,9 @@
 @import "bootstrap";
 
+main {
+  background-color:#f0f8ff
+}
+
 #header_bar_image {
   display: inline-block;
 }
@@ -138,8 +142,10 @@ main {
       margin-bottom: 0.5em;
       padding: 0;
     }
+    .fieldname
     .field,
     .actions {
+      display:block;
       margin-bottom: 0.5em;
       padding: 0;
     }
@@ -238,14 +244,42 @@ nav.logged_in_nav {
 }
 
 
-.navbar .collapse{
-  background-color:green
+.navbar-light .navbar-nav .nav-link {
+  color: #bbffbb;
 }
+
 
 .navbar-brand {
   background-color:green
 }
 
 .navbar{
-  background-color: green
+  background-color:green
+}
+
+.nav-link{
+  color: green
+  
+}
+
+.btn {
+  color: white
+}
+
+.navbar-toggler{
+  background-color: white;
+  border:1px solid transparent;
+  border-radius: .25rem;
+  font-size: 1.25rem;
+  padding: .25rem .75rem;
+}
+
+.navbar-toggler-icon{
+  display:inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  content: "";
+  background: no-repeat center center;
+  background-size: 100% 100%;
 }

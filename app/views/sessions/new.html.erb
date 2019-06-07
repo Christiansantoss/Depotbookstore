@@ -7,14 +7,19 @@
 <h2>Please Log In</h2>
 
 <div class= "field ">
+    <div class= "fieldname">
     <%= label_tag :name, 'Name:'%>
+    </div>
+    <div class>
     <%= text_field_tag :name, params[:name] %>
 </div>
 
 <div class="field">
+  <div class="fieldname">
     <%= label_tag :password, 'Password '%>
+  </div>
     <%= password_field_tag :password, params[:password] %>
-</div>
+</>
 
  <div class="actions">
       <%= submit_tag "Login" %>
@@ -27,3 +32,4 @@ it uses form_tag, which simply builds a regular HTML <form>. Inside that form,
 it uses text_field_tag and password_field_tag, two helpers that create HTML <input> tags.
 Each helper takes two parameters. The first is the name to give to the field, 
 and the second is the value with which to populate the field! -->
+
