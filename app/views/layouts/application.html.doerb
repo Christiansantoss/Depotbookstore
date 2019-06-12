@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>Pragog Books Online Store</title>
-    <%= csrf_meta_tags %> <!--sets up all the behind-the-scenes data needed to prevent 
-    cross-site request forgery attacks, important for forms!-->
+    <%= csrf_meta_tags %> 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,38 +14,14 @@
   </head>
 
   <body>
-  <!--  <header class="main">
-      <div id="header_bar_image">
-        <%= image_tag 'logo.svg', alt: 'The Pragmatic Bookshelf' %>
-        <h1><%= @page_title %></h1>
-      </div>
-      
-      <div id="search_bar">
-        <%= form_tag store_index_path, method: :get do  %>
-          <%= select_tag :search_by, raw("<option> Keyword </option><option> Title </option><option> Description </option>"), id: 'search_bar_search_by' %>
-          <%= text_field_tag(:search, params[:search], id: 'search_bar_text') %>
-          <%= image_submit_tag "search.png", id: 'search_bar_submit'%>
-        <% end %>
-      </div>
 
-        <aside>
-        <%= form_tag store_index_path, class: 'locale' do %>
-          <%= select_tag 'set_locale',
-            options_for_select(LANGUAGES, I18n.locale.to_s),
-            onchange: 'this.form.submit()' %>
-          <%= submit_tag 'submit', id: "submit_locale_change" %>
-        <% end %>
-      </aside>
-      
-    </header> -->
 
 <nav class="navbar navbar-expand-lg navbar-light">
 
   <%=link_to image_tag("logo.svg", size:"150x59"), store_index_path, :class => "navbar-brand", method: :get %>
 
 
-   <!-- <a class="navbar-brand" data-method="get" href="/">
-    <img src="/assets/logo.svg" alt="Logo" width="150" height="59"> </a> -->
+  
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -54,7 +30,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
 
-       <!-- vv language selector below vv -->
+
      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Language
@@ -63,8 +39,7 @@
           <a class="dropdown-item" href="https://bookapp12.herokuapp.com/en">English</a>
           <a class="dropdown-item" href="https://bookapp12.herokuapp.com/es">Spanish</a>
         </div>
-        <!-- vvvvv Login section below vvvvv -->
-
+   
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Login
@@ -73,7 +48,7 @@
           <a class="dropdown-item" href="/login">Login</a>
         </div>
 
-      <!-- vvvv Site button below vvvv -->
+     
 
       <li class="nav-item">
         <a class="nav-link" href="/" data-method="get">Questions</a>
@@ -98,19 +73,7 @@
 
 
     <section class="content">
-    <!--
-      <nav class="side_nav">
-      
 
-
-        <ul>
-          <li><a href="/"><%= t('.home') %></a></li>
-          <li><a href="/questions"><%= t('.questions') %></a></li>
-          <li><a href="/news"><%= t('.news') %></a></li>
-          <li><a href="/contact"><%= t('.contact') %></a></li>
-
-        </ul>
-        -->
 
         <% if session[:user_id] %>
           <nav class= "logged_in_nav">

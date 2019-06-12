@@ -1,0 +1,72 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Pragog Books Online Store
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %meta{content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport"}/
+    :javascript
+      I18n.defaultLocale  = "#{I18n.default_locale}";
+      I18n.locale  = "#{I18n.locale}";
+
+
+
+      
+  %body
+
+  
+    %nav.navbar.navbar-expand-lg.navbar-light
+      = link_to image_tag("logo.svg", size:"150x59"), store_index_path, :class => "navbar-brand", method: :get
+      %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", type: "button"}
+        %span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+        %ul.navbar-nav.mr-auto
+          %li.nav-item.dropdown
+            %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
+              Language
+            .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+              %a.dropdown-item{href: "https://bookapp12.herokuapp.com/en"} English
+              %a.dropdown-item{href: "https://bookapp12.herokuapp.com/es"} Spanish
+          %li.nav-item.dropdown
+            %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
+              Login
+            .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+              %a.dropdown-item{href: "/login"} Login
+          %li.nav-item
+            %a.nav-link{"data-method" => "get", href: "/"} Questions
+          %li.nav-item
+            %a.nav-link{"data-method" => "get", href: "/"} News
+          %li.nav-item
+            %a.nav-link{"data-method" => "get", href: "/"} Contact
+        = form_tag store_index_path,{:method=> 'get', class:"form-inline my-2 my-lg-0", role: "search"} do
+          .form-group
+            = text_field_tag :search, "",class:"form control", placeholder: "search"
+          = submit_tag "search", class: 'btn btn-outline-success my-2 my-sm-0'
+    
+    
+    
+    %section.content
+      
+      - if session[:user_id]
+        %nav.logged_in_nav
+          %ul
+            %li
+              = link_to 'Orders', orders_path
+            %li
+              = link_to 'Products', products_path
+            %li
+              = link_to 'Users', users_path
+            %li
+              = button_to 'Logout', logout_path, method: :delete
+      
+      #cart.carts
+        - if session[:hide_cart]
+          = render_if @cart && @cart.line_items.any?, "carts/cart_hidden"
+        - else
+          = render_if @cart && @cart.line_items.any?, @cart
+      
+      
+      %main{class: "#{controller.controller_name}"}
+        = yield

@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'i18n-js'
 
+gem 'haml'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'will_paginate', '~> 3.1.7'
