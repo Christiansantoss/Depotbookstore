@@ -1,0 +1,12 @@
+- if notice
+
+  %aside#notice= notice
+
+%h1= t('.title_html')
+
+#products
+
+  = render @products
+  
+#loading_gif{style: "text-align:center"}
+= will_paginate @products

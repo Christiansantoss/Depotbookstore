@@ -1,0 +1,7 @@
+%article 
+  - if notice 
+  %aside#notice = notice 
+  %h2#cart_title
+    = t('.title')
+  #cart_button_hide 
+    = button_to ("Hide"), carts_hide_cart_path(id: @cart.id), remote: true 
