@@ -1,20 +1,15 @@
 = form_with(model: order, local: true) do |form|
   - if order.errors.any?
     #error_explanation
-
       %h2
         = raw t('errors.template.header', count: @order.errors.count, |
           model: t('activerecord.models.order'))                      |
         \.
       %p
-
         = t('errors.template.body')
       %ul
-
         - order.errors.full_messages.each do |message|
           %li= raw message
-
-          
   .field
     = form.label :name, t('.name')
     = form.text_field :name, id: :order_name, size: 40
