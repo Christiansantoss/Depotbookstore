@@ -32,4 +32,3 @@ it uses form_tag, which simply builds a regular HTML <form>. Inside that form,
 it uses text_field_tag and password_field_tag, two helpers that create HTML <input> tags.
 Each helper takes two parameters. The first is the name to give to the field, 
 and the second is the value with which to populate the field! -->
-

@@ -1,7 +1,18 @@
-%article 
-  - if notice 
-  %aside#notice = notice 
+%article
+  - if notice
+    %aside#notice= notice
   %h2#cart_title
     = t('.title')
-  #cart_button_hide 
-    = button_to ("Hide"), carts_hide_cart_path(id: @cart.id), remote: true 
+  #cart_button_hide
+    = button_to ("Hide"), carts_hide_cart_path(id: @cart.id), remote: true
+  %table
+    = render(cart.line_items)
+    %tfoot
+      %tr
+        %th{colspan: "2"} Total:
+        %td.price= number_to_currency(cart.total_price)
+  .actions
+    #cart_button_empty
+      = button_to t('.empty'), cart, method: :delete, data: { confirm: 'Are you sure?' }
+    #cart_button_checkout
+      = button_to ('Checkout'), new_order_path(locale: I18n.locale), method: :get, class: "checkout"
