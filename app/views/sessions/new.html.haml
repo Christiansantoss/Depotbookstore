@@ -2,7 +2,6 @@
   - if flash[:alert]
     %aside.notice
       = flash[:alert]
-      
   = form_tag do
     %h2 Please Log In
     .field
@@ -14,6 +13,5 @@
         .fieldname
           = label_tag :password, 'Password '
         = password_field_tag :password, params[:password]
-        \&gt;
         .actions
           = submit_tag "Login"
