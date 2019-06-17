@@ -9,12 +9,12 @@
   = @order.address 
 
 %p 
- %strong Email: 
+  %strong Email: 
   = @order.email 
 
 %p
 %strong Pay type: 
-  = @order.pay_type
+= @order.pay_type
 
 = link_to 'Edit', edit_order_path(@order) |
 = link_to 'Back', orders_path 

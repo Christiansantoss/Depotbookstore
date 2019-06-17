@@ -4,7 +4,8 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    #@products = Product.all
+    @products = Product.paginate(:per_page => 25, :page => params[:page])
   end
 
   # GET /products/1
@@ -47,7 +48,7 @@ class ProductsController < ApplicationController
 
         @products = Product.all 
         ActionCable.server.broadcast 'products',
-          html: render_to_string('store/index', layout: false) # Layout false we only want to render this view not the entire page
+          html: render_to_string('store/index', layout: false) 
       else
         format.html { render :edit }
         format.json { render json: @product.errors, status: :unprocessable_entity }
