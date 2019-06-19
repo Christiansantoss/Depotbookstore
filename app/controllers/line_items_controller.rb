@@ -29,7 +29,7 @@ class LineItemsController < ApplicationController
   def create
     puts "******* In line items controller create"
     puts params.to_s
-    product = Product.find(params[:product_id]) # Using params object to get the :product_id parameter from the request
+    product = Product.find(params[:product_id]) 
     @line_item = @cart.add_product(product)
 
     # Adding a call to respond_to() telling that we want to respond with a format of .js
