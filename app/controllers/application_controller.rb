@@ -19,9 +19,9 @@ class ApplicationController < ActionController::Base
       puts "SET LOCALE TO: "+I18n.locale.to_s
     end
 
-    def authorize
-      unless User.find_by(id: session[:user_id])
-        redirect_to login_url, notice: "Please log in"
-      end
-    end
+    #def authorize
+     # unless User.find_by(id: session[:user_id])
+      #  redirect_to login_url, notice: "Please log in"
+      #end
+    #end
 end
