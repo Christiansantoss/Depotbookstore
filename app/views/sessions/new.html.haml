@@ -1,0 +1,17 @@
+%section.depot_form
+  - if flash[:alert]
+    %aside.notice
+      = flash[:alert]
+  = form_tag do
+    %h2 Please Log In
+    .field
+      .fieldname
+        = label_tag :name, 'Name:'
+      %div
+        = text_field_tag :name, params[:name]
+      .field
+        .fieldname
+          = label_tag :password, 'Password '
+        = password_field_tag :password, params[:password]
+        .actions
+          = submit_tag "Login"
