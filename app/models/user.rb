@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   # validates :name, presence: true, uniqueness: true
   # has_secure_password
+  has_many :orders
 
   after_destroy :ensure_an_admin_remains
 
