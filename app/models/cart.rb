@@ -12,8 +12,7 @@ class Cart < ApplicationRecord
     end
     
     def total_price
-        line_items.to_a.sum { |item| item.total_price } # We implement the Cart method using the nifty Array::sum() method 
-                                                        # to sum the prices of each item in the collection
+        line_items.to_a.sum { |item| item.total_price } 
     end
 end
 
