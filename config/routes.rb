@@ -1,7 +1,8 @@
 Rails.application.routes.draw do 
   
-  devise_for :users
-  get 'admin' => 'admin#index'
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
+  root to: 'store#index'
+  #get 'admin' => 'admin#index'
 
   
   controller :sessions do 
