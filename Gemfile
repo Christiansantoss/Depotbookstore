@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.5'
  # gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise', '~> 4.6', '>= 4.6.2'
+gem 'omniauth-facebook', '~> 5.0'
 
  # Translations into javascript object and allows us to access them
 
