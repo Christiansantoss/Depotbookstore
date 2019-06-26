@@ -31,9 +31,6 @@ class User < ApplicationRecord
   end
 
 
-
-
-
   private
      def ensure_an_admin_remains
        if User.count.zero?
