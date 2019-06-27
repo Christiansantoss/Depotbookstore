@@ -38,3 +38,8 @@ class User < ApplicationRecord
        end
      end
 end
+
+#omniauth is used to authenticate a user checking out in the application if a user is not signed up with
+# facebook a user can sign in with to the app without facebook
+# implementation for signing in to the app with another verification site is the same just changing the gem file name to site 
+# authenticating with ex. "gem 'omniauth-github"  and implentation is the same way.
