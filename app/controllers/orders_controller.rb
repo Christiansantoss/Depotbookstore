@@ -109,3 +109,5 @@ end
 
 # def pay type params to submit the payment details to the customers back end 
 # payment processing system.  
+
+#understanding methods from reading rails guides 
