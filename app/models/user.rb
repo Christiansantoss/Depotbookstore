@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:facebook, :github]
   # validates :name, presence: true, uniqueness: true
   # has_secure_password
   has_many :orders
@@ -14,7 +14,7 @@ class User < ApplicationRecord
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]
+      if data = session["devise.github_data"] && session["devise.github_data"]["extra"]
         ["raw_info"]
         user.email = data["email"] if user.email.blank?
       end
