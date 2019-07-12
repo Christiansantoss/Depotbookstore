@@ -261,7 +261,9 @@ Devise.setup do |config|
   # up on your models and hooks.
 
   config.omniauth :facebook, "2281575698597104", "ec0efc099041680efc77077f53650db1", callback_url: "http://localhost:3000/users/auth/facebook/callback"
-  config.omniauth :github, "ccd74b313330563f6329", "75f8df915e3125975aa4d6d0de98cb02e8044613", callback_url: "http://localhost:3000/users/auth/github/callback"
+  #config.omniauth :github, "ccd74b313330563f6329", "75f8df915e3125975aa4d6d0de98cb02e8044613", callback_url: "http://localhost:3000/users/oauth2/github/callback"
+  config.omniauth :google_oauth2, "101592808652-1uug4c6k3ggajaj8ft5493j8ea80uk47.apps.googleusercontent.com" , "U8uqs9vBVwe17O-Y5C12Kwet", callback_url: "http://localhost:3000/users/auth/google/callback"
+  
   
 
   # ==> Warden configuration

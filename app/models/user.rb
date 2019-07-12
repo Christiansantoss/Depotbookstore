@@ -6,38 +6,39 @@ class User < ApplicationRecord
   # validates :name, presence: true, uniqueness: true
   # has_secure_password
   has_many :orders
+  has_many :user_provider, :dependent => :destroy
   
 
-  after_destroy :ensure_an_admin_remains
+  #after_destroy :ensure_an_admin_remains
 
-  class Error < StandardError
-  end
+  #class Error < StandardError
+  #end
 
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]
-        ["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
-    end
-  end
+  #def self.new_with_session(params, session)
+   # super.tap do |user|
+    #  if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]
+     #   ["raw_info"]
+      #  user.email = data["email"] if user.email.blank?
+     # end
+    #end
+  #end
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name
-      user.image = auth.info.image
-    end
-  end
+  #def self.from_omniauth(auth)
+   # where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    #  user.email = auth.info.email
+     # user.password = Devise.friendly_token[0,20]
+      #user.name = auth.info.name
+     # user.image = auth.info.image
+    #end
+  #end 
 
 
-  private
-     def ensure_an_admin_remains
-       if User.count.zero?
-         raise Error.new "Can't delete last user"
-       end
-     end
+  #private
+   #  def ensure_an_admin_remains
+    #   if User.count.zero?
+     #    raise Error.new "Can't delete last user"
+      # end
+     #end
 end
 
 #omniauth is used to authenticate a user checking out in the application if a user is not signed up with
