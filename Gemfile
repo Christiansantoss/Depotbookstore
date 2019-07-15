@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise', '~> 4.6', '>= 4.6.2'
 gem 'omniauth-facebook', '~> 5.0'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-github', '~> 1.3'
 
  # Translations into javascript object and allows us to access them
 
