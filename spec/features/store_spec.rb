@@ -11,6 +11,7 @@ RSpec.feature 'Visiting homepage' do
   let (:home) {Home.new} 
   scenario 'visit homepage', js: true do
     home.visit_store_page
-    expect(page).to have_content('title for app')
+    expect(page).to have_content('Your Pragmatic Catalog')
   end
 end 
+
