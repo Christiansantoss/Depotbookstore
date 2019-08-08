@@ -33,3 +33,18 @@ feature "Place_Order", type: :feature, js:true do
 
 
 end
+
+RSpec.feature "Checkout", type: :feature do
+  scenario 'checkout successfully' do
+    click_link_or_button 'checkout'
+    within('form') do
+      fill_in "Name", with: 'Austin'
+      fill_in "Address", with: '123 Amador drive'
+      fill_in "Email", with: 'ccc@gmail.com'
+      page.select 'Purchase Order', from: 'Pay with'
+      fill_in "orderpo_number", with: '879214879'
+    end
+    click_button 'Place Order'
+    expect(page).to have_content('Thank you for your order')
+  end
+end
