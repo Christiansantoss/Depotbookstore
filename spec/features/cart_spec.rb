@@ -6,7 +6,7 @@ feature "Place_Order", type: :feature, js:true do
     Rails.application.load_seed
   end
 
-  scenario "should be create user successful" do
+  scenario "creates a user successfully logs in adds product to cart empties cart" do
     visit '/users/sign_up'
     within('#new_user') do
       fill_in 'Email', with: 'ccc@gmail.com'
