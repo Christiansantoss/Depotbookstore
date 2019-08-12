@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
  # gem 'bcrypt', '~> 3.1.7'
-
+gem 'rb-readline'
 gem 'devise', '~> 4.6', '>= 4.6.2'
 gem 'omniauth-facebook', '~> 5.0'
 gem 'omniauth-google-oauth2'

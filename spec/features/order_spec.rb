@@ -30,4 +30,6 @@ feature "Place_Order", type: :feature, js:true do
         click_button 'Place Order'
         expect(page).to have_content('Thank you for your order')
   end
+
+
 end
