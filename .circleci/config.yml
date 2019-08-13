@@ -6,7 +6,6 @@ jobs:
 
     steps:
       - checkout
-      - run: bundle install
 
       - run:
           name: Greeting
