@@ -15,7 +15,7 @@ jobs:
           name: Print the Current Time
           command: date
 
-      pre-steps:
+    pre-steps:
       - run:
           name: "Install git and SSH client"
           command: |
