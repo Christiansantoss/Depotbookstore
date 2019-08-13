@@ -1,0 +1,24 @@
+# Check our guides at https://confluence.atlassian.com/x/8r-5Mw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: ruby:2.4.6
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - bundler
+        script: # Modify the commands below to build your repository.
+          - bundle install
+
+definitions:
+  caches:
+    bundler: ./vendor
+
+script:
+  - pipe: atlassian/heroku-deploy:1.0.0
+    variables:
+      HEROKU_API_KEY: $HEROKU_API_KEY
+      HEROKU_APP_NAME: 'My awesome shiny app'
+      ZIP_FILE: 'your-app-sources.tar.gz'
