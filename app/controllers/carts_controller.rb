@@ -87,5 +87,4 @@ class CartsController < ApplicationController
       logger.error "Attempt to access invalid cart #{params[:id]}"
       redirect_to store_index_url, notice: 'Invalid cart' # Redirect to the catalog display by using the redirect_to()method. The :notice to send message 
     end                                                # Prevents user from retriggering error by clicking reloading button.
-
 end
