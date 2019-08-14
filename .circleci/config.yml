@@ -15,9 +15,9 @@ jobs:
           name: Print the Current Time
           command: date
 
-      - run:
-          name: Which bundler?
-          command: bundle -v
+      # - run:
+      #     name: Which bundler?
+      #     command: bundle -v
 
       - run:
           name: Bundle Install
