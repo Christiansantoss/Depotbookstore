@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    parallelism: 3
     docker:
       - image: debian:stretch
 
@@ -14,6 +15,14 @@ jobs:
       - run:
           name: Print the Current Time
           command: date
+
+      - run:
+          name: Which bundler?
+          command: bundle -v
+
+      - run:
+          name: Bundle Install
+          command: bundle check --path vendor/bundle || bundle install --deployment
 
     pre-steps:
       - run:
