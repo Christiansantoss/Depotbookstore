@@ -54,6 +54,14 @@ jobs:
           background: true
 
       - run:
+          name: run Migration
+          command: rails db:migrate
+
+      - run:
+          name: run database
+          command: rails db:seed
+
+      - run:
           name: start rspec
           command: rspec
 
