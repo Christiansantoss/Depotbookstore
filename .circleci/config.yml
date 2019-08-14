@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    parallelism: 3
     docker:
       - image: debian:stretch
 
