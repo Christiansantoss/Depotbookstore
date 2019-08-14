@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    parallelism: 3
     docker:
       - image: circleci/ruby:2.4.2-jessie-node
         environment:
@@ -52,6 +53,10 @@ jobs:
           command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
 
+      - run:
+          name: start rspec
+          command: rspec
+
     pre-steps:
       - run:
           name: "Install git and SSH client"
@@ -61,7 +66,3 @@ jobs:
                 --no-progress \
                 git \
                 openssh-client
-
-
-
-          
