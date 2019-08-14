@@ -16,6 +16,8 @@ jobs:
           POSTGRES_DB: rails_depot_app
           POSTGRES_PASSWORD: ""
 
+
+
     steps:
       - checkout
 
@@ -41,6 +43,15 @@ jobs:
           name: Bundle Install
           command: bundle check --path vendor/bundle || bundle install --deployment
 
+      - run: mkdir test-reports
+      - run:
+          name: Download Selenium
+          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: Start Selenium
+          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+          background: true
+
     pre-steps:
       - run:
           name: "Install git and SSH client"
@@ -51,17 +62,6 @@ jobs:
                 git \
                 openssh-client
 
-jobs:
-  build:
-    docker:
-      - image: circleci/node:jessie-browsers
-    steps:
-      - checkout
-      - run: mkdir test-reports
-      - run:
-          name: Download Selenium
-          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
-      - run:
-          name: Start Selenium
-          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
-          background: true
+
+
+          
