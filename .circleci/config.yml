@@ -20,60 +20,60 @@ jobs:
 
 
     steps:
-      - checkout
+    - checkout
 
-      - run:
-          name: Greeting
-          command: echo Hello, world.
+    - run:
+        name: Greeting
+        command: echo Hello, world.
 
-      - run:
-          name: Print the Current Time
-          command: date
+    - run:
+        name: Print the Current Time
+        command: date
 
-      - run:
-          name: Configure Bundler and install dependencies
-          command: |
-                gem update --system
-                gem install bundler
+    - run:
+        name: Configure Bundler and install dependencies
+        command: |
+              gem update --system
+              gem install bundler
 
-      - run:
-          name: Which bundler?
-          command: bundle -v
+    - run:
+        name: Which bundler?
+        command: bundle -v
 
-      - run:
-          name: Bundle Install
-          command: bundle check --path vendor/bundle || bundle install --deployment
+    - run:
+        name: Bundle Install
+        command: bundle check --path vendor/bundle || bundle install --deployment
 
-      - run: mkdir test-reports
-      # - run:
-      #     name: Download Selenium
-      #     command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
-      # - run:
-      #     name: Start Selenium
-      #     command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
-      #     background: true
-      -run:
-          name: create database
-          command: createdb rails_depot_app
+    - run: mkdir test-reports
+    # - run:
+    #     name: Download Selenium
+    #     command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+    # - run:
+    #     name: Start Selenium
+    #     command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+    #     background: true
+    -run:
+        name: create database
+        command: createdb rails_depot_app
 
-      - run:
-          name: run Migration
-          command: rails db:migrate
+    - run:
+        name: run Migration
+        command: rails db:migrate
 
-      - run:
-          name: run database
-          command: rails db:seed
+    - run:
+        name: run database
+        command: rails db:seed
 
-      - run:
-          name: start rspec
-          command: rspec
+    - run:
+        name: start rspec
+        command: rspec
 
-    pre-steps:
-      - run:
-          name: "Install git and SSH client"
-          command: |
-            apk add \
-                --update \
-                --no-progress \
-                git \
-                openssh-client
+  pre-steps:
+    - run:
+        name: "Install git and SSH client"
+        command: |
+          apk add \
+              --update \
+              --no-progress \
+              git \
+              openssh-client
