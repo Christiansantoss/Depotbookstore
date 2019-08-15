@@ -60,12 +60,12 @@ jobs:
             name: start rspec
             command: rspec
 
-  pre-steps:
-    - run:
-        name: "Install git and SSH client"
-        command: |
-          apk add \
-              --update \
-              --no-progress \
-              git \
-              openssh-client
+    pre-steps:
+      - run:
+          name: "Install git and SSH client"
+          command: |
+            apk add \
+                --update \
+                --no-progress \
+                git \
+                openssh-client
