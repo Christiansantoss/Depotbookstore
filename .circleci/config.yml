@@ -20,45 +20,45 @@ jobs:
 
 
     steps:
-    - checkout
+        - checkout
 
-    - run:
-        name: Greeting
-        command: echo Hello, world.
+        - run:
+            name: Greeting
+            command: echo Hello, world.
 
-    - run:
-        name: Print the Current Time
-        command: date
+        - run:
+            name: Print the Current Time
+            command: date
 
-    - run:
-        name: Configure Bundler and install dependencies
-        command: |
-              gem update --system
-              gem install bundler
+        - run:
+            name: Configure Bundler and install dependencies
+            command: |
+                  gem update --system
+                  gem install bundler
 
-    - run:
-        name: Which bundler?
-        command: bundle -v
+        - run:
+            name: Which bundler?
+            command: bundle -v
 
-    - run:
-        name: Bundle Install
-        command: bundle check --path vendor/bundle || bundle install --deployment
+        - run:
+            name: Bundle Install
+            command: bundle check --path vendor/bundle || bundle install --deployment
 
-    - run:
-        name: create database
-        command: createdb rails_depot_app
+        - run:
+            name: create database
+            command: createdb rails_depot_app
 
-    - run:
-        name: run Migration
-        command: rails db:migrate
+        - run:
+            name: run Migration
+            command: rails db:migrate
 
-    - run:
-        name: run database
-        command: rails db:seed
+        - run:
+            name: run database
+            command: rails db:seed
 
-    - run:
-        name: start rspec
-        command: rspec
+        - run:
+            name: start rspec
+            command: rspec
 
   pre-steps:
     - run:
