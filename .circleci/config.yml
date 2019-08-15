@@ -2,6 +2,7 @@ version: 2
 jobs:
   build:
     # parallelism: 3
+    working_directory: ~/circleci-demo-ruby-rails
     docker:
       - image: circleci/ruby:2.4.2-jessie-node
         environment:
@@ -56,14 +57,19 @@ jobs:
             name: run database
             command: rails db:seed
 
+        # Install ChromeDriver.
+        - run: wget -N http://chromedriver.storage.googleapis.com/2.9/chromedriver_linux64.zip -P ~/
+        - run: unzip ~/chromedriver_linux64.zip -d ~/
+        - run: rm ~/chromedriver_linux64.zip
+        - run: sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
+        - run: sudo chown root:root /usr/local/bin/chromedriver
+        - run: sudo chmod 0755 /usr/local/bin/chromedriver
+
         # Install Chrome for Debian.
         - run: echo "deb http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee -a /etc/apt/sources.list
         - run: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
         - run: sudo apt-get update && sudo apt-get install google-chrome-stable
 
-        - run:
-            name: install webdriver
-            command: brew install chromedriver
 
         - run:
             name: start rspec
