@@ -58,12 +58,12 @@ jobs:
             command: rails db:seed
 
         # Install ChromeDriver.
-        - run: wget -N http://chromedriver.storage.googleapis.com/2.9/chromedriver_linux64.zip -P ~/
-        - run: unzip ~/chromedriver_linux64.zip -d ~/
-        - run: rm ~/chromedriver_linux64.zip
-        - run: sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
-        - run: sudo chown root:root /usr/local/bin/chromedriver
-        - run: sudo chmod 0755 /usr/local/bin/chromedriver
+        # - run: wget -N http://chromedriver.storage.googleapis.com/2.9/chromedriver_linux64.zip -P ~/
+        # - run: unzip ~/chromedriver_linux64.zip -d ~/
+        # - run: rm ~/chromedriver_linux64.zip
+        # - run: sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
+        # - run: sudo chown root:root /usr/local/bin/chromedriver
+        # - run: sudo chmod 0755 /usr/local/bin/chromedriver
 
         # Install Chrome for Debian.
         - run: echo "deb http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee -a /etc/apt/sources.list
@@ -74,6 +74,7 @@ jobs:
         - run: wget -N http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar -P ~/
         - run: sudo mv -f ~/selenium-server-standalone-3.4.0.jar /usr/local/bin/selenium-server-standalone.jar
         - run: sudo chown root:root /usr/local/bin/selenium-server-standalone.jar
+        - run: rm -rf ~/.chromedriver-helper
         - run: sudo chmod 0755 /usr/local/bin/selenium-server-standalone.jar
 
 
