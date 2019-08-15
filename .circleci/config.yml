@@ -56,6 +56,15 @@ jobs:
             name: run database
             command: rails db:seed
 
+        # Install Chrome for Debian.
+        - run: echo "deb http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee -a /etc/apt/sources.list
+        - run: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        - run: sudo apt-get update && sudo apt-get install google-chrome-stable
+
+        - run:
+            name: install webdriver
+            command: brew install chromedriver
+
         - run:
             name: start rspec
             command: rspec
