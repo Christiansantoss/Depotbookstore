@@ -44,9 +44,9 @@ jobs:
             name: Bundle Install
             command: bundle check --path vendor/bundle || bundle install --deployment
 
-        # - run:
-        #     name: create database
-        #     command: createdb rails_depot_app
+        - run:
+            name: create database
+            command: rails db:create
 
         - run:
             name: run Migration
