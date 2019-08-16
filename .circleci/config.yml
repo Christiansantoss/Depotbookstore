@@ -1,10 +1,10 @@
 version: 2
 jobs:
   build:
-    # parallelism: 3
+    parallelism: 3
     working_directory: ~/circleci-demo-ruby-rails
     docker:
-      - image: circleci/ruby:2.5.1-jessie-node
+      - image: circleci/ruby:2.5.1-node-browsers
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -22,6 +22,10 @@ jobs:
 
     steps:
         - checkout
+
+        # Restore bundle cache
+        - type: cache-restore
+          key: rails-demo-{{ checksum "Gemfile.lock" }}
 
         - run:
             name: Greeting
@@ -45,25 +49,33 @@ jobs:
             name: Bundle Install
             command: bundle check --path vendor/bundle || bundle install --deployment
 
-        - run:
-            name: create database
-            command: rails db:create
+        # - run:
+        #     name: create database
+        #     command: rails db:create
+        #
+        # - run:
+        #     name: run Migration
+        #     command: rails db:migrate
+        #
+        # - run:
+        #     name: run database
+        #     command: rails db:seed
 
         - run:
-            name: run Migration
-            command: rails db:migrate
+            name: Database Setup
+            command: |
+                  bundle exec rails db:create
+                  bundle exec rails db:migrate
+                  bundle exec rails db:seed
 
-        - run:
-            name: run database
-            command: rails db:seed
-
-        # Install ChromeDriver.
-        # - run: wget -N http://chromedriver.storage.googleapis.com/2.9/chromedriver_linux64.zip -P ~/
-        # - run: unzip ~/chromedriver_linux64.zip -d ~/
-        # - run: rm ~/chromedriver_linux64.zip
-        # - run: sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
-        # - run: sudo chown root:root /usr/local/bin/chromedriver
-        # - run: sudo chmod 0755 /usr/local/bin/chromedriver
+        #Install ChromeDriver.
+        - run: wget -N https://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_linux64.zip -P ~/
+        - run: unzip ~/chromedriver_linux64.zip -d ~/
+        - run: rm ~/chromedriver_linux64.zip
+        - run: rm -rf ~/.chromedriver-helper
+        - run: sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
+        - run: sudo chown root:root /usr/local/bin/chromedriver
+        - run: sudo chmod 0755 /usr/local/bin/chromedriver
 
         # Install Chrome for Debian.
         - run: echo "deb http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee -a /etc/apt/sources.list
@@ -74,14 +86,33 @@ jobs:
         - run: wget -N http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar -P ~/
         - run: sudo mv -f ~/selenium-server-standalone-3.4.0.jar /usr/local/bin/selenium-server-standalone.jar
         - run: sudo chown root:root /usr/local/bin/selenium-server-standalone.jar
-        - run: rm -rf ~/.chromedriver-helper
-        - run: chromedriver-update
         - run: sudo chmod 0755 /usr/local/bin/selenium-server-standalone.jar
 
+        - run: yarn install
+        - run: RAILS_ENV=test bundle exec rails webpacker:compile
+        - run: gem install rspec
+        - run: bundle exec rspec
+        # - run: rails g rspec:install
 
-        - run:
-            name: start rspec
-            command: rspec
+         # Install xvfb
+        - run: sudo apt-get install xvfb -y
+        - run: sudo pkill Xvfb
+
+
+
+        # - run:
+        #     name: start rspec
+        #     command: rspec
+        # - run:
+        #     name: Run rspec in parallel
+        #     command: |
+        #       bundle exec rspec --profile 10 \
+        #                         --format RspecJunitFormatter \
+        #                         --out test_results/rspec.xml \
+        #                         --format progress \
+        #                         $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+        - store_test_results:
+            path: test_results
 
     pre-steps:
       - run:
