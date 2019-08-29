@@ -42,7 +42,7 @@
           %li.nav-item
             %a.nav-link{"data-method" => "get", href: "/"} Contact
           %li.nav-item
-            %a.nav-link{"data-method" => "get", href: "/chats"} Chatroom
+            %a.nav-link{"data-method" => "get", href: "https://bookapp12.herokuapp.com/chats"} Chatroom
         = form_tag store_index_path,{:method=> 'get', class:"form-inline my-2 my-lg-0", role: "search"} do
           .form-group
             = text_field_tag :search, "",class:"form control", placeholder: "search"
