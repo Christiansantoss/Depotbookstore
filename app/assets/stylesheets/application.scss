@@ -1,7 +1,8 @@
 @import "bootstrap";
 
 main {
-  background-color:#f0f8ff
+  background-color:#f0f8ff;
+  width: 1919px;
 }
 
 #header_bar_image {
@@ -293,3 +294,29 @@ nav.logged_in_nav {
   display: inline-block;
   margin-left: 30px;
 }
+
+    input.form-control.sidebar-form {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border: 0;
+      border-radius: 0;
+    }
+
+    .chat-box {
+      height: 94vh;
+      overflow: scroll;
+    }
+
+    .chat {
+      border-radius: 3px;
+      padding: 0rem 2rem 0 1rem;
+    }
+
+    .chat-username {
+      font-size: 0.7rem;
+    }
+
+    .chat-message {
+      font-size: 0.85rem;
+    }

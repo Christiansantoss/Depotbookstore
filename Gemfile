@@ -41,6 +41,8 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'will_paginate', '~> 3.1.7'
 gem 'awesome_print'
+gem 'pusher'
+gem 'figaro'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
