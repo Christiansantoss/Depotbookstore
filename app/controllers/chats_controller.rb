@@ -1,6 +1,6 @@
 class ChatsController < ApplicationController
   def create
-    @chat = Chat.new(chat_params)
+    @chat = Chat.create(chat_params)
     respond_to do |format|
       if @chat.save
         format.html { redirect_to @chat, notice: 'Message was successfully posted.'}
