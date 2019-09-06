@@ -5,6 +5,7 @@
     %title Pragog Books Online Store
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    %script{src: "https://js.pusher.com/4.1/pusher.min.js"}
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     %meta{content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport"}/
     :javascript
@@ -40,6 +41,8 @@
             %a.nav-link{"data-method" => "get", href: "/"} News
           %li.nav-item
             %a.nav-link{"data-method" => "get", href: "/"} Contact
+          %li.nav-item
+            %a.nav-link{href: "/chats"} Chatroom
         = form_tag store_index_path,{:method=> 'get', class:"form-inline my-2 my-lg-0", role: "search"} do
           .form-group
             = text_field_tag :search, "",class:"form control", placeholder: "search"
@@ -71,4 +74,3 @@
       %main{class: "#{controller.controller_name}"}
         = yield
 
-/adding small file change to try and make changes from this current branch into my master branch.

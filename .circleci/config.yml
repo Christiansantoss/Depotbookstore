@@ -1,19 +1,118 @@
 version: 2
 jobs:
   build:
+    parallelism: 3
+    working_directory: ~/circleci-demo-ruby-rails
     docker:
-      - image: debian:stretch
+      - image: circleci/ruby:2.5.1-node-browsers
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: circleci-demo-ruby
+          RAILS_ENV: test
+      - image: circleci/postgres:9.5-alpine
+        environment:
+          POSTGRES_USER: circleci-demo-ruby
+          POSTGRES_DB: rails_depot_app
+          POSTGRES_PASSWORD: ""
+
+
 
     steps:
-      - checkout
+        - checkout
 
-      - run:
-          name: Greeting
-          command: echo Hello, world.
+        # Restore bundle cache
+        - type: cache-restore
+          key: rails-demo-{{ checksum "Gemfile.lock" }}
 
-      - run:
-          name: Print the Current Time
-          command: date
+        - run:
+            name: Greeting
+            command: echo Hello, world.
+
+        - run:
+            name: Print the Current Time
+            command: date
+
+        - run:
+            name: Configure Bundler and install dependencies
+            command: |
+                  gem update --system
+                  gem install bundler
+
+        - run:
+            name: Which bundler?
+            command: bundle -v
+
+        - run:
+            name: Bundle Install
+            command: bundle check --path vendor/bundle || bundle install --deployment
+
+        # - run:
+        #     name: create database
+        #     command: rails db:create
+        #
+        # - run:
+        #     name: run Migration
+        #     command: rails db:migrate
+        #
+        # - run:
+        #     name: run database
+        #     command: rails db:seed
+
+        - run:
+            name: Database Setup
+            command: |
+                  bundle exec rails db:create
+                  bundle exec rails db:migrate
+                  bundle exec rails db:seed
+
+        #Install ChromeDriver.
+        - run: wget -N https://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_linux64.zip -P ~/
+        - run: unzip ~/chromedriver_linux64.zip -d ~/
+        - run: rm ~/chromedriver_linux64.zip
+        - run: rm -rf ~/.chromedriver-helper
+        - run: sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
+        - run: sudo chown root:root /usr/local/bin/chromedriver
+        - run: sudo chmod 0755 /usr/local/bin/chromedriver
+
+        # Install Chrome for Debian.
+        - run: echo "deb http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee -a /etc/apt/sources.list
+        - run: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        - run: sudo apt-get update && sudo apt-get install google-chrome-stable
+
+         # Install Selenium.
+        - run: wget -N http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar -P ~/
+        - run: sudo mv -f ~/selenium-server-standalone-3.4.0.jar /usr/local/bin/selenium-server-standalone.jar
+        - run: sudo chown root:root /usr/local/bin/selenium-server-standalone.jar
+        - run: sudo chmod 0755 /usr/local/bin/selenium-server-standalone.jar
+
+        - run: yarn install
+        - run: RAILS_ENV=test bundle exec rails webpacker:compile
+        - run: gem install rspec
+        - run: bundle exec rspec
+        # - run: rails g rspec:install
+
+         # Install xvfb
+        - run: sudo apt-get install xvfb -y
+        - run: sudo pkill Xvfb
+
+
+
+        # - run:
+        #     name: start rspec
+        #     command: rspec
+        # - run:
+        #     name: Run rspec in parallel
+        #     command: |
+        #       bundle exec rspec --profile 10 \
+        #                         --format RspecJunitFormatter \
+        #                         --out test_results/rspec.xml \
+        #                         --format progress \
+        #                         $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+        - store_test_results:
+            path: test_results
 
     pre-steps:
       - run:
